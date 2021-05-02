@@ -2,7 +2,10 @@
     "name": "laravel/laravel",
     "type": "project",
     "description": "The Laravel Framework.",
-    "keywords": ["framework", "laravel"],
+    "keywords": [
+        "framework",
+        "laravel"
+    ],
     "license": "MIT",
     "require": {
         "php": "^7.3|^8.0",
@@ -12,7 +15,8 @@
         "guzzlehttp/guzzle": "^7.0.1",
         "laravel/framework": "^8.12",
         "laravel/tinker": "^2.5",
-        "league/flysystem": "^1.0"
+        "league/flysystem": "^1.0",
+        "vladimir-yuldashev/laravel-queue-rabbitmq": "^11.2"
     },
     "require-dev": {
         "facade/ignition": "^2.5",

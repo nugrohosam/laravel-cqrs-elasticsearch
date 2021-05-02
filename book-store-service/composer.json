@@ -11,6 +11,7 @@
         "guzzlehttp/guzzle": "^7.0.1",
         "laravel/framework": "^8.12",
         "laravel/tinker": "^2.5",
+        "php-amqplib/php-amqplib": "^3.0",
         "vladimir-yuldashev/laravel-queue-rabbitmq": "^11.2"
     },
     "require-dev": {

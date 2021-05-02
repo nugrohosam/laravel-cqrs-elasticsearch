@@ -1,0 +1,81 @@
+version: '2.2'
+services:
+  rabbitmq:
+    image: rabbitmq:latest
+    ports:
+      - 5672:5672
+
+  node-01:
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.12.1
+    container_name: node-01
+    environment:
+      - node.name=node-01
+      - cluster.name=node-docker-cluster
+      - discovery.seed_hosts=node-02,node-03
+      - cluster.initial_master_nodnode-=node-01,node-02,node-03
+      - bootstrap.memory_lock=true
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    volumes:
+      - data-01:/usr/share/elasticsearch/data
+    ports:
+      - 9201:9201
+    networks:
+      - elastic
+
+  node-02:
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.12.1
+    container_name: node-02
+    environment:
+      - node.name=node-02
+      - cluster.name=node-docker-cluster
+      - discovery.seed_hosts=node-01,node-03
+      - cluster.initial_master_nodnode-=node-01,node-02,node-03
+      - bootstrap.memory_lock=true
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    volumes:
+      - data-02:/usr/share/elasticsearch/data
+    ports:
+      - 9202:9202
+    networks:
+      - elastic
+      
+  node-03:
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.12.1
+    container_name: node-03
+    environment:
+      - node.name=node-03
+      - cluster.name=node-docker-cluster
+      - discovery.seed_hosts=node-01,node-02
+      - cluster.initial_master_nodnode-=node-01,node-02,node-03
+      - bootstrap.memory_lock=true
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    volumes:
+      - data-03:/usr/share/elasticsearch/data
+    ports:
+      - 9203:9203
+    networks:
+      - elastic
+
+volumes:
+  data-01:
+    driver: local
+  data-02:
+    driver: local
+  data-03:
+    driver: local
+
+networks:
+  elastic:
+    driver: bridge

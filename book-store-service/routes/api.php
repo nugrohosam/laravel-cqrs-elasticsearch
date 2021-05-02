@@ -15,3 +15,5 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::post('book', 'BookController@store');
+Route::put('book', 'BookController@store');
+Route::delete('book', 'BookController@store');

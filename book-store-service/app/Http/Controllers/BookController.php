@@ -16,4 +16,19 @@ class BookController extends Controller
 
         $book->save();
     }
+    
+    public function update($id, Request $request)
+    {
+        $book = Book::find($id);
+
+        $book->name = $request->name;
+        $book->year = $request->year;
+
+        $book->save();
+    }
+
+    public function delete($id)
+    {
+        Book::find($id)->delete();
+    }
 }
